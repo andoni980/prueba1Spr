@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<title>Página Principal</title>
+	
+	<main>
+		
+		<ul th:each="l : ${libros}">
+			<li  th:text="${l.titulo + ': ' + l.precio}">Nombre: precio</li>
+			<a th:href="@{/} + ${l.id}" href="detalle-libro.html">Detalle del Libro</a>
+			
+		</ul>
+		
+	</main>
+
+
+</html>

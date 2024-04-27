@@ -30,8 +30,8 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Iterable<Libro> getLibrosByNombreContains(String nombre) {
-		return libroRepository.findByNombreContains(nombre);
+	public Iterable<Libro> getLibrosByTituloContains(String titulo) {
+		return libroRepository.findByTituloContains(titulo);
 	}
 
 	@Override
@@ -47,6 +47,11 @@ public class UsuarioServiceImp implements UsuarioService {
 	@Override
 	public Iterable<Autor> getAutoresByNombreContains(String nombre) {
 		return autorRepository.findByNombreContains(nombre);
+	}
+
+	@Override
+	public Optional<Autor> getAutorByLibroId(Long id) {
+		return autorRepository.findByLibroId(id);
 	}
 
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<title>Administración</title>
+
+<main>
+
+	<form th:action="@{/admin}" action="index.html" method="post" th:object="${libro}">
+		<label for="titulo">Titulo</label><br>
+		<input placeholder="Titulo" th:field="*{titulo}">
+		<span th:errors="*{titulo}"></span><br><br>
+
+		<label for="precio">Precio</label>
+		<input type="number" step=".01" plaholder="Precio" th:field="*{precio}">
+		<span th:errores="*{precio}"></span><br><br>
+
+		<label for="descuento">Descuento</label>
+		<input type="number" plaholder="Descuento" th:field="*{descuento}">
+		<span th:errores="*{descuento}"></span><br><br>
+
+		<label for="isbn">ISBN</label>
+		<input placeholder="ISBN" th:field="*{isbn}">
+		<span th:errores="*{isbn}"></span><br><br>
+
+		<button>Guardar</button>
+
+	</form>
+
+</main>
+
+</html>

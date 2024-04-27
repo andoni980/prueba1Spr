@@ -7,17 +7,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 
 @Entity
@@ -28,14 +32,13 @@ public class Libro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message = "El nombre es obligatorio")
+	@NotNull(message = "El título es obligatorio")
 	@Size(min = 2, max = 150)
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "titulo")
+	private String titulo;
 
 	@NotNull(message = "El precio es un dato obligatorio")
 	@Min(0)
-	@DecimalMax("2")
 	@Column(name = "precio")
 	private BigDecimal precio;
 
@@ -50,11 +53,11 @@ public class Libro {
 	private String urlFoto;
 	
 	@NotNull(message = "El ISBN es un dato obligatorio")
-	@Pattern(regexp = "^\\d{13}$", message = "Debe tener 13 caracteres")
+	@Pattern(regexp = "^\\d{13}$", message = "Debe tener 13 digitos")
 	private String isbn;
 	
-//	@NotNull
-//	@ManyToOne
-//	private Autor autor;
+	@NotNull
+	@ManyToOne
+	private Autor autor;
 
 }

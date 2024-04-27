@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="UTF-8">
+<title>Autores</title>
+	
+	<main>
+		
+		<ul>
+			<li th:each="a : ${autores}" th:text="${a.nombre + ': ' + a.email}">Nombre: email</li>
+		</ul>
+		
+	</main>
+
+
+</html>

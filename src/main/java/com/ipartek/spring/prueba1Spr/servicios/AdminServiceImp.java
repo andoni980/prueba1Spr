@@ -1,11 +1,13 @@
 package com.ipartek.spring.prueba1Spr.servicios;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.spring.prueba1Spr.entidades.Autor;
 import com.ipartek.spring.prueba1Spr.entidades.Libro;
 
 @Service
+@Primary
 public class AdminServiceImp extends UsuarioServiceImp implements AdminService{
 
 	@Override

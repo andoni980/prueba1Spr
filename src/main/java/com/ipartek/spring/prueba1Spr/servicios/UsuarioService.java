@@ -9,10 +9,11 @@ public interface UsuarioService {
 
 	Iterable<Libro> getLibros();
 	Optional<Libro> getLibroById(Long id);
-	Iterable<Libro> getLibrosByNombreContains(String nombre);
+	Iterable<Libro> getLibrosByTituloContains(String titulo);
 
 	
 	Iterable<Autor> getAutores();
 	Optional<Autor> getAutorById(Long id);
 	Iterable<Autor> getAutoresByNombreContains(String nombre);
+	Optional<Autor> getAutorByLibroId(Long id);
 }
