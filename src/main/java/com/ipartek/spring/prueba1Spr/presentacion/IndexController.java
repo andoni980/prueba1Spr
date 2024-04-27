@@ -34,8 +34,6 @@ public class IndexController {
 	@GetMapping("{id}")
 	public String detalleLibroPorId(Model modelo, @PathVariable("id") Long id) {
 		modelo.addAttribute("libro", usuarioService.getLibroById(id).get());
-//		modelo.addAttribute("autor", usuarioService.getAutorByLibroId(id).get());
-//		System.out.println(modelo.getAttribute("autor").toString());
 		return "detalle-libro";
 	}
 	

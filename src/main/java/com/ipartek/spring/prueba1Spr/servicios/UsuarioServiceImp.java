@@ -49,9 +49,4 @@ public class UsuarioServiceImp implements UsuarioService {
 		return autorRepository.findByNombreContains(nombre);
 	}
 
-	@Override
-	public Optional<Autor> getAutorByLibroId(Long id) {
-		return autorRepository.findByLibroId(id);
-	}
-
 }

@@ -15,5 +15,4 @@ public interface UsuarioService {
 	Iterable<Autor> getAutores();
 	Optional<Autor> getAutorById(Long id);
 	Iterable<Autor> getAutoresByNombreContains(String nombre);
-	Optional<Autor> getAutorByLibroId(Long id);
 }
