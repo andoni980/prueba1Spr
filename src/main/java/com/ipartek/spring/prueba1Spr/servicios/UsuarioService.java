@@ -10,6 +10,7 @@ public interface UsuarioService {
 	Iterable<Libro> getLibros();
 	Optional<Libro> getLibroById(Long id);
 	Iterable<Libro> getLibrosByTituloContains(String titulo);
+	Iterable<Libro> getLibrosSinAutores();
 
 	
 	Iterable<Autor> getAutores();

@@ -49,4 +49,9 @@ public class UsuarioServiceImp implements UsuarioService {
 		return autorRepository.findByNombreContains(nombre);
 	}
 
+	@Override
+	public Iterable<Libro> getLibrosSinAutores() {
+		return libroRepository.getLibrosSinAutores();
+	}
+
 }

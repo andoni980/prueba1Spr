@@ -7,9 +7,8 @@
 	<main>
 		
 		<ul th:each="l : ${libros}">
-			<li  th:text="${l.titulo + ': ' + l.precio}">Nombre: precio</li>
+			<li  th:text="${l.titulo + ': ' + l.precio}">Titulo: precio</li>
 			<a th:href="@{/} + ${l.id}" href="detalle-libro.html">Detalle del Libro</a>
-			
 		</ul>
 		
 	</main>

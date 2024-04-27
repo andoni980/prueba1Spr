@@ -27,7 +27,8 @@ public class IndexController {
 	
 	@GetMapping
 	public String index(Model modelo) {
-		modelo.addAttribute("libros", usuarioService.getLibros());
+		modelo.addAttribute("libros", usuarioService.getLibrosSinAutores());
+		System.out.println(modelo.getAttribute("libros").toString());
 		return "index";
 	}
 	
