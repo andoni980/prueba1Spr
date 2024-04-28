@@ -5,12 +5,11 @@
 <title>Autores</title>
 	
 	<main>
-		
 		<ul>
-			<li th:each="a : ${autores}" th:text="${a.nombre + ': ' + a.email}">Nombre: email</li>
+			<li th:each="a : ${autores}" th:text="${a.nombre + ': ' + a.email}">
+				Nombre: email
+			</li>
 		</ul>
-		
 	</main>
-
 
 </html>

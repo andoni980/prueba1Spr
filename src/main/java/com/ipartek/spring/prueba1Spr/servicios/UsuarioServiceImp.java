@@ -1,10 +1,14 @@
 package com.ipartek.spring.prueba1Spr.servicios;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ipartek.spring.prueba1Spr.dtos.AutorSinLibrosDTO;
+import com.ipartek.spring.prueba1Spr.dtos.LibroDTO;
 import com.ipartek.spring.prueba1Spr.entidades.Autor;
 import com.ipartek.spring.prueba1Spr.entidades.Libro;
 import com.ipartek.spring.prueba1Spr.repositorios.AutorRepository;
@@ -35,8 +39,13 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Iterable<Autor> getAutores() {
-		return autorRepository.findAll();
+	public Set<AutorSinLibrosDTO> getAutores() {
+		Set<AutorSinLibrosDTO> autoresDTOs = new HashSet<>();
+		for(Autor a: autorRepository.findAll()) {
+			AutorSinLibrosDTO autorDTO = new AutorSinLibrosDTO(a.getId(), a.getNombre(), a.getEmail());
+			autoresDTOs.add(autorDTO);
+		}
+		return autoresDTOs;
 	}
 
 	@Override
@@ -50,8 +59,15 @@ public class UsuarioServiceImp implements UsuarioService {
 	}
 
 	@Override
-	public Iterable<Libro> getLibrosSinAutores() {
-		return libroRepository.getLibrosSinAutores();
+	public Set<LibroDTO> getLibrosSinAutores() {
+//		System.out.println(libroRepository.getLibrosSinAutores().toString());
+//		Set<Libro> libros = libroRepository.getLibrosSinAutores();
+		Set<LibroDTO> librosDTOs = new HashSet<>();
+		for(Libro l: libroRepository.getLibrosSinAutores()) {
+			LibroDTO libroDTO = new LibroDTO(l.getId(), l.getTitulo(), l.getPrecio(), l.getDescuento());
+			librosDTOs.add(libroDTO);
+		}
+		return librosDTOs;
 	}
 
 }

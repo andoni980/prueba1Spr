@@ -4,6 +4,127 @@
 
 <main>
 
+	<div class="container mt-5">
+		<h3 class="text">Libros</h3>
+		<div class="table-responsive">
+			<table class="table table-hover table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Titulo</th>
+						<th>Precio</th>
+						<th>Descuento</th>
+						<th>ISBN</th>
+						<th>Autor</th>
+						<th>OPCIONES</th>
+					</tr>
+				</thead>
+				<tbody th:each="l : ${libros}">
+					<tr>
+						<th th:text="${l.id}">id</th>
+						<td th:text="${l.titulo}">titulo</td>
+						<td th:text="${l.precio}">precio</td>
+						<td th:text="${l.descuento}">descuento</td>
+						<td th:text="${l.isbn}">isbn</td>
+						<td th:text="${l.autor.nombre}">autor</td>
+						<td><a class="btn btn-sm btn-primary">Editar</a> <a
+								th:href="@{/admin/borrar/} + ${l.id}" class="btn btn-sm btn-danger">Borrar</a></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><a th:href="@{/admin}" href="admin" class="btn btn-sm btn-primary">Añadir</a></td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+		<form th:action="@{/admin}" action="admin.html" method="post" th:object="${libro}" class="rounded border border-5 text-bg-info p-5 mt-5">
+			<h3 clas="text-dark">Libro</h3>
+			<div class="row mb-3">
+				<label for="id" class="col-sm-2 col-form-label">Id</label>
+				<div class="col-sm">
+					<input type="number" class="form-control" th:field="*{id}">
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
+				<div class="col-sm">
+					<input type="text" class="form-control ${errores.nombre != null ? 'is-invalid' : '' }"
+						th:field="*{titulo}">
+					<div class="invalid-feedback">${errores.titulo}</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="precio" class="col-sm-2 col-form-label">Precio</label>
+				<div class="col-sm">
+					<div class="input-group mb-3">
+						<input type="number" step=".01"
+							class="form-control ${errores.precio != null ? 'is-invalid' : '' }" th:field="*{precio}">
+						<span class="input-group-text">€</span>
+						<div class="invalid-feedback">${errores.precio}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="descuento" class="col-sm-2 col-form-label">Descuento</label>
+				<div class="col-sm">
+					<div class="input-group mb-3">
+						<input type="number" class="form-control ${errores.descuento != null ? 'is-invalid' : '' }"
+							th:field="*{descuento}">
+						<div class="invalid-feedback">${errores.descuento}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+				<div class="col-sm">
+					<div class="input-group mb-3">
+						<input type="number" class="form-control ${errores.isbn != null ? 'is-invalid' : '' }"
+							th:field="*{isbn}">
+						<div class="invalid-feedback">${errores.isbn}</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<!--				<label for="autor" class="col-sm-2 col-form-label">Autor</label>
+				<div class="col-sm">
+					<div class="input-group mb-3">
+						<input type="number" class="form-control ${errores.autor != null ? 'is-invalid' : '' }"
+							th:field="*{autor.id}">
+						<div class="invalid-feedback">${errores.autor_id}</div>
+					</div>
+				</div>-->
+				<div>
+					<label for="autor" class="col-sm-2 col-form-label">Elige un autor</label>
+
+					<select th:field="*{autor}">
+						<option th:each="a : ${autores}" th:value="${a.id}" th:text="${a.nombre}">
+					</select>
+				</div>
+			</div>
+
+
+			<div class="row mb-3">
+				<div class="offset-sm-2 col-sm">
+					<button class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+
+
+
+	<!--
 	<form th:action="@{/admin}" action="index.html" method="post" th:object="${libro}">
 		<label for="titulo">Titulo</label><br>
 		<input placeholder="Titulo" th:field="*{titulo}">
@@ -23,7 +144,7 @@
 
 		<button>Guardar</button>
 
-	</form>
+	</form>-->
 
 </main>
 

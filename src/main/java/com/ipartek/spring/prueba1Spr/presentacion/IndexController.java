@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,7 @@ public class IndexController {
 	@GetMapping("autores")
 	public String autores(Model modelo) {
 		modelo.addAttribute("autores", usuarioService.getAutores());
+//		System.out.println(modelo.getAttribute("autores").toString());
 		return "autores";
 	}
 	
@@ -63,7 +65,9 @@ public class IndexController {
 //	}
 	
 	@GetMapping("admin")
-	public String adminLibros(Libro libro) {
+	public String adminLibros(Libro libro, Model modelo) {
+		modelo.addAttribute("libros", usuarioService.getLibros());
+		modelo.addAttribute("autores", usuarioService.getAutores());
 		libro.setTitulo("");
 		return "admin";
 	}
@@ -74,9 +78,14 @@ public class IndexController {
 			System.out.println(bindingResult.toString());
 			return "admin";
 		}
-		
 		adminService.saveLibro(libro);
 		
-		return "redirect:/";
+		return "redirect:/admin";
+	}
+	
+	@DeleteMapping("admin/borrar/{id}")
+	public String deleteLibro(@PathVariable("id") Long id) {
+		adminService.deleteLibro(id);
+		return "/admin";
 	}
 }

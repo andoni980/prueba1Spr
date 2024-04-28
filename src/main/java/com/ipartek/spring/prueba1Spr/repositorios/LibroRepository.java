@@ -7,7 +7,7 @@ import com.ipartek.spring.prueba1Spr.entidades.Libro;
 
 public interface LibroRepository extends CrudRepository<Libro, Long> {
 
-	@Query("select id, titulo, precio from Libro l")
+	@Query("SELECT l from Libro l")
 	Iterable<Libro> getLibrosSinAutores();
 	
 	Iterable<Libro> findByTituloContains(String titulo);
