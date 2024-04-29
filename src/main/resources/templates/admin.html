@@ -28,9 +28,10 @@
 						<td th:text="${l.descuento}">descuento</td>
 						<td th:text="${l.isbn}">isbn</td>
 						<td th:text="${l.autor.nombre}">autor</td>
-						<td><a class="btn btn-sm btn-primary">Editar</a> <a
-							th:href="@{/admin/borrar/} + ${l.id}"
-							class="btn btn-sm btn-danger">Borrar</a></td>
+						<td>
+							<a th:href="@{/admin/} + ${l.id}" class="btn btn-sm btn-primary">Editar</a>
+							<a th:href="@{/admin/borrar/} + ${l.id}" class="btn btn-sm btn-danger">Borrar</a>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>

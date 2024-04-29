@@ -87,6 +87,19 @@ public class IndexController {
 		return "redirect:/admin";
 	}
 	
+	@GetMapping("admin/{id}")
+	public String adminLibroPost(@Valid Libro libro, BindingResult bindingResult, Model modelo, @PathVariable("id") Long id) {
+		modelo.addAttribute("autores", usuarioService.getAutores());
+		if(bindingResult.hasErrors()) {
+			modelo.addAttribute("libros", usuarioService.getLibros());
+			System.out.println(bindingResult.toString());
+			return "admin";
+		}
+		adminService.updateLibro(libro);
+		
+		return "redirect:/admin";
+	}
+	
 	@GetMapping("admin/borrar/{id}")
 	public String deleteLibro(@PathVariable("id") Long id) {
 		adminService.deleteLibro(id);
