@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{_global :: plantilla(~{::title}, ~{::main})}"
+	xmlns:th="http://www.thymeleaf.org">
 <title>Administración</title>
 
 <main>
@@ -19,8 +20,8 @@
 						<th>OPCIONES</th>
 					</tr>
 				</thead>
-				<tbody th:each="l : ${libros}">
-					<tr>
+				<tbody>
+					<tr th:each="l : ${libros}">
 						<th th:text="${l.id}">id</th>
 						<td th:text="${l.titulo}">titulo</td>
 						<td th:text="${l.precio}">precio</td>
@@ -28,7 +29,8 @@
 						<td th:text="${l.isbn}">isbn</td>
 						<td th:text="${l.autor.nombre}">autor</td>
 						<td><a class="btn btn-sm btn-primary">Editar</a> <a
-								th:href="@{/admin/borrar/} + ${l.id}" class="btn btn-sm btn-danger">Borrar</a></td>
+							th:href="@{/admin/borrar/} + ${l.id}"
+							class="btn btn-sm btn-danger">Borrar</a></td>
 					</tr>
 				</tbody>
 				<tfoot>
@@ -39,14 +41,16 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><a th:href="@{/admin}" href="admin" class="btn btn-sm btn-primary">Añadir</a></td>
-						<td></td>
+						<td><a th:href="@{/admin}" href="admin"
+							class="btn btn-sm btn-primary">Añadir</a></td>
 					</tr>
 				</tfoot>
 			</table>
 		</div>
 
-		<form th:action="@{/admin}" action="admin.html" method="post" th:object="${libro}" class="rounded border border-5 text-bg-info p-5 mt-5">
+		<form th:action="@{/admin}" action="admin.html" method="post"
+			th:object="${libro}"
+			class="rounded border border-5 text-bg-info p-5 mt-5">
 			<h3 clas="text-dark">Libro</h3>
 			<div class="row mb-3">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
@@ -57,9 +61,10 @@
 			<div class="row mb-3">
 				<label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
 				<div class="col-sm">
-					<input type="text" class="form-control ${errores.nombre != null ? 'is-invalid' : '' }"
+					<input type="text"
+						class="form-control"
 						th:field="*{titulo}">
-					<div class="invalid-feedback">${errores.titulo}</div>
+					<span th:errors="*{titulo}"></span>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -67,9 +72,9 @@
 				<div class="col-sm">
 					<div class="input-group mb-3">
 						<input type="number" step=".01"
-							class="form-control ${errores.precio != null ? 'is-invalid' : '' }" th:field="*{precio}">
-						<span class="input-group-text">€</span>
-						<div class="invalid-feedback">${errores.precio}</div>
+							class="form-control"
+							th:field="*{precio}"> <span class="input-group-text">€</span>
+						<span th:errors="*{precio}"></span>
 					</div>
 				</div>
 			</div>
@@ -77,9 +82,10 @@
 				<label for="descuento" class="col-sm-2 col-form-label">Descuento</label>
 				<div class="col-sm">
 					<div class="input-group mb-3">
-						<input type="number" class="form-control ${errores.descuento != null ? 'is-invalid' : '' }"
+						<input type="number"
+							class="form-control"
 							th:field="*{descuento}">
-						<div class="invalid-feedback">${errores.descuento}</div>
+						<span th:errors="*{descuento}"></span>
 					</div>
 				</div>
 			</div>
@@ -87,9 +93,10 @@
 				<label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
 				<div class="col-sm">
 					<div class="input-group mb-3">
-						<input type="number" class="form-control ${errores.isbn != null ? 'is-invalid' : '' }"
+						<input type="number"
+							class="form-control"
 							th:field="*{isbn}">
-						<div class="invalid-feedback">${errores.isbn}</div>
+						<span th:errors="*{isbn}"></span>
 					</div>
 				</div>
 			</div>
@@ -97,17 +104,18 @@
 				<!--				<label for="autor" class="col-sm-2 col-form-label">Autor</label>
 				<div class="col-sm">
 					<div class="input-group mb-3">
-						<input type="number" class="form-control ${errores.autor != null ? 'is-invalid' : '' }"
+						<input type="number" class="form-control"
 							th:field="*{autor.id}">
-						<div class="invalid-feedback">${errores.autor_id}</div>
+						<span th:errors="*{autor}"></span>
 					</div>
 				</div>-->
 				<div>
-					<label for="autor" class="col-sm-2 col-form-label">Elige un autor</label>
-
-					<select th:field="*{autor}">
-						<option th:each="a : ${autores}" th:value="${a.id}" th:text="${a.nombre}">
+					<label for="autor" class="col-sm-2 col-form-label">Elige un
+						autor</label> <select th:field="*{autor}">
+						<option th:each="a : ${autores}" th:value="${a.id}"
+							th:text="${a.nombre}"></option>
 					</select>
+					<span th:errors="*{autor}"></span>
 				</div>
 			</div>
 

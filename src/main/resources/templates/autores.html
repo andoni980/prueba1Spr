@@ -5,11 +5,20 @@
 <title>Autores</title>
 	
 	<main>
-		<ul>
-			<li th:each="a : ${autores}" th:text="${a.nombre + ': ' + a.email}">
-				Nombre: email
-			</li>
-		</ul>
+		<div class="container mt-5">
+			<ul class="list-group">
+				<li th:each="a : ${autores}" class="list-group-item mt-3">
+				<h3>Autor</h3>
+					<p th:text="'Nombre: ' + ${a.nombre}"></p>
+					<p th:text="'Email ' + ${a.email}"></p>
+					<span></span>
+					<ul class="list-group">
+						<p>Libros</p>
+						<li th:each="l : ${a.libros}" th:text="${l.titulo}" class="list-group-item"></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 	</main>
 
 </html>

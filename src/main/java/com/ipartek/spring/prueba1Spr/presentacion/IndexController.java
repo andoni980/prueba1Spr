@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ipartek.spring.prueba1Spr.entidades.Autor;
 import com.ipartek.spring.prueba1Spr.entidades.Libro;
 import com.ipartek.spring.prueba1Spr.servicios.AdminService;
 import com.ipartek.spring.prueba1Spr.servicios.UsuarioService;
@@ -28,8 +28,8 @@ public class IndexController {
 	
 	@GetMapping
 	public String index(Model modelo) {
-		modelo.addAttribute("libros", usuarioService.getLibrosSinAutores());
-		System.out.println(modelo.getAttribute("libros").toString());
+		modelo.addAttribute("libros", usuarioService.getLibros());
+//		System.out.println(modelo.getAttribute("libros").toString());
 		return "index";
 	}
 	
@@ -47,7 +47,10 @@ public class IndexController {
 	
 	@GetMapping("autores")
 	public String autores(Model modelo) {
-		modelo.addAttribute("autores", usuarioService.getAutores());
+		Iterable<Autor> autores = usuarioService.getAutores();
+		modelo.addAttribute("autores", autores);
+		System.out.println(autores);
+		System.out.println(autores.iterator().next().getLibros());
 //		System.out.println(modelo.getAttribute("autores").toString());
 		return "autores";
 	}
@@ -73,8 +76,9 @@ public class IndexController {
 	}
 	
 	@PostMapping("admin")
-	public String adminLibroPost(@Valid Libro libro, BindingResult bindingResult) {
+	public String adminLibroPost(@Valid Libro libro, BindingResult bindingResult, Model modelo) {
 		if(bindingResult.hasErrors()) {
+			modelo.addAttribute("libros", usuarioService.getLibros());
 			System.out.println(bindingResult.toString());
 			return "admin";
 		}
@@ -83,9 +87,9 @@ public class IndexController {
 		return "redirect:/admin";
 	}
 	
-	@DeleteMapping("admin/borrar/{id}")
+	@GetMapping("admin/borrar/{id}")
 	public String deleteLibro(@PathVariable("id") Long id) {
 		adminService.deleteLibro(id);
-		return "/admin";
+		return "redirect:/admin";
 	}
 }
