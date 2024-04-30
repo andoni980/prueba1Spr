@@ -29,7 +29,7 @@
 						<td th:text="${l.isbn}">isbn</td>
 						<td th:text="${l.autor.nombre}">autor</td>
 						<td>
-							<a th:href="@{/admin/} + ${l.id}" class="btn btn-sm btn-primary">Editar</a>
+							<a th:href="@{/admin/} + ${l.id} + '#libro'" class="btn btn-sm btn-primary">Editar</a>
 							<a th:href="@{/admin/borrar/} + ${l.id}" class="btn btn-sm btn-danger">Borrar</a>
 						</td>
 					</tr>
@@ -48,11 +48,13 @@
 				</tfoot>
 			</table>
 		</div>
+		
+		<hr class="border border-primary border-3 opacity-75 mt-5">
 
-		<form th:action="@{/admin}" action="admin.html" method="post"
+		<form id="libro" th:action="@{/admin}" action="admin.html" method="post"
 			th:object="${libro}"
 			class="rounded border border-5 text-bg-info p-5 mt-5">
-			<h3 clas="text-dark">Libro</h3>
+			<h3 class="text-dark">Libro</h3>
 			<div class="row mb-3">
 				<label for="id" class="col-sm-2 col-form-label">Id</label>
 				<div class="col-sm">

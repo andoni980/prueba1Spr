@@ -88,6 +88,15 @@ public class IndexController {
 	}
 	
 	@GetMapping("admin/{id}")
+	public String adminUpdateLibros(Model modelo, @PathVariable("id") Long id) {
+		modelo.addAttribute("libros", usuarioService.getLibros());
+		Libro libro = usuarioService.getLibroById(id).get();
+		modelo.addAttribute("libro", libro);
+		modelo.addAttribute("autores", usuarioService.getAutores());
+		return "admin";
+	}
+	
+	@PostMapping("admin/{id}")
 	public String adminLibroPost(@Valid Libro libro, BindingResult bindingResult, Model modelo, @PathVariable("id") Long id) {
 		modelo.addAttribute("autores", usuarioService.getAutores());
 		if(bindingResult.hasErrors()) {
@@ -104,5 +113,15 @@ public class IndexController {
 	public String deleteLibro(@PathVariable("id") Long id) {
 		adminService.deleteLibro(id);
 		return "redirect:/admin";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout() {
+		return "logout";
 	}
 }
